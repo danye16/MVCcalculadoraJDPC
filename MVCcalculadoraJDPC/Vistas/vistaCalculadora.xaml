@@ -43,7 +43,7 @@
                 <Button Grid.Row="3" Grid.Column="0" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="1" CornerRadius="50" Command="{Binding MostrarNumero1}" ></Button>
                 <Button Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="2" CornerRadius="50" Command="{Binding MostrarNumero1}"></Button>
                 <Button Grid.Row="3" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A"  Text="3" CornerRadius="50" Command="{Binding MostrarNumero1}"></Button>
-                <Button Grid.Row="3" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="+" CornerRadius="50"  ></Button>
+                <Button Grid.Row="3" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="+" CornerRadius="50" Command="{Binding OperacionSumar}"  ></Button>
                 <Button Grid.Row="4" Grid.Column="0" Margin="0,10,10,0" Grid.ColumnSpan="2" BackgroundColor="#443C3A" TextColor="White" Text="0"
                  Command="{Binding MostrarNumero0}"       CornerRadius="50" ></Button>
                 <Button Grid.Row="4" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="." CornerRadius="50" ></Button>

@@ -22,6 +22,13 @@ namespace MVCcalculadoraJDPC.VistaModelo
         double _Numero9;
         double _Numero0;
         string _MostrarPantalla;
+        double Resultado;
+        double auxiliar1;
+        double auxiliar2;
+        string operacion;
+
+
+
 
         #endregion
         #region CONSTRUCTOR
@@ -37,11 +44,13 @@ namespace MVCcalculadoraJDPC.VistaModelo
             get { return _MostrarPantalla; }
             set { SetValue(ref _MostrarPantalla, value); }
         }
+
         public double Numero1
         {
             get { return _Numero1; }
             set { SetValue(ref _Numero1, value); }
         }
+      
         public double Numero2
         {
             get { return _Numero2; }
@@ -94,6 +103,49 @@ namespace MVCcalculadoraJDPC.VistaModelo
         {
 
         }
+        public void Sumar()
+        {
+            auxiliar1 = double.Parse(MostrarPantalla);
+            operacion = "+";
+            MostrarPantalla = "";
+
+            Operacion();
+            
+
+        }
+        public void Operacion()
+        {
+            // auxiliar2 = double.Parse(MostrarPantalla);
+
+            switch (operacion)
+            {
+                case "+":
+                    auxiliar2 = double.Parse(MostrarPantalla);
+
+                    Resultado = auxiliar1 + auxiliar2;
+                    break;
+                case "-":
+                    auxiliar2 -= auxiliar1;
+                    break;
+                case "*":
+                    auxiliar2 *= auxiliar1;
+                    break;
+                case "÷":
+                    if (auxiliar1 != 0)
+                    {
+                        auxiliar2 /= auxiliar1;
+                    }
+                    else
+                    {
+                        DisplayAlert("Estas Mal", "No se puede diviidir entre zero", "qwq");
+                        //resultado.Text = "Error qwq";
+                    }
+                    break;
+            }
+
+            MostrarPantalla = Resultado.ToString();
+            
+        }
         public void InsertarNumero1()
         {
             MostrarPantalla += "1";
@@ -138,6 +190,7 @@ namespace MVCcalculadoraJDPC.VistaModelo
         public void LimpiarPantalla()
         {
             MostrarPantalla = string.Empty;
+            auxiliar1 = 0;
         }
         public void procesoSimple() 
         {
@@ -160,6 +213,10 @@ namespace MVCcalculadoraJDPC.VistaModelo
         public ICommand MostrarNumero8 => new Command(InsertarNumero8);
         public ICommand MostrarNumero9 => new Command(InsertarNumero9);
         public ICommand MostrarNumero0 => new Command(InsertarNumero0);
+       // public ICommand OperacionCommand => new Command(Operacion);
+        public ICommand OperacionSumar => new Command(Sumar);
+
+
 
 
 
