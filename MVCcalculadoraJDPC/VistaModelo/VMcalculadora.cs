@@ -26,6 +26,8 @@ namespace MVCcalculadoraJDPC.VistaModelo
         double auxiliar1;
         double auxiliar2;
         string operacion;
+        double Resultado2;
+
 
 
 
@@ -105,13 +107,41 @@ namespace MVCcalculadoraJDPC.VistaModelo
         }
         public void Sumar()
         {
-            auxiliar1 = double.Parse(MostrarPantalla);
-            operacion = "+";
-            MostrarPantalla = "";
+            if (Resultado2!=0) 
+            {
+                auxiliar1 = double.Parse(MostrarPantalla);
+                Resultado2 += auxiliar1;
+                Resultado = Resultado2;
+                MostrarPantalla = "";
 
-            Operacion();
+
+            }
+            else
+            {
+                auxiliar1 = double.Parse(MostrarPantalla);
+                operacion = "+";
+                MostrarPantalla = "";
+            }
+               
             
-
+        }
+        public void Restar()
+        {
+            auxiliar1 = double.Parse(MostrarPantalla);
+            operacion = "-";
+            MostrarPantalla = "";
+        }
+        public void Multiplicar()
+        {
+            auxiliar1 = double.Parse(MostrarPantalla);
+            operacion = "*";
+            MostrarPantalla = "";
+        }
+        public void Dividir()
+        {
+            auxiliar1 = double.Parse(MostrarPantalla);
+            operacion = "/";
+            MostrarPantalla = "";
         }
         public void Operacion()
         {
@@ -121,19 +151,22 @@ namespace MVCcalculadoraJDPC.VistaModelo
             {
                 case "+":
                     auxiliar2 = double.Parse(MostrarPantalla);
-
-                    Resultado = auxiliar1 + auxiliar2;
+                    Resultado2 = auxiliar1 + auxiliar2;
+                    Resultado = Resultado2;   
                     break;
                 case "-":
-                    auxiliar2 -= auxiliar1;
+                    auxiliar2 = double.Parse(MostrarPantalla);
+                    Resultado = auxiliar1 - auxiliar2;
                     break;
                 case "*":
-                    auxiliar2 *= auxiliar1;
+                    auxiliar2 = double.Parse(MostrarPantalla);
+                    Resultado = auxiliar1 * auxiliar2;
                     break;
-                case "÷":
+                case "/":
                     if (auxiliar1 != 0)
                     {
-                        auxiliar2 /= auxiliar1;
+                        auxiliar2 = double.Parse(MostrarPantalla);
+                        Resultado = auxiliar1 / auxiliar2;
                     }
                     else
                     {
@@ -145,6 +178,8 @@ namespace MVCcalculadoraJDPC.VistaModelo
 
             MostrarPantalla = Resultado.ToString();
             
+
+
         }
         public void InsertarNumero1()
         {
@@ -191,6 +226,9 @@ namespace MVCcalculadoraJDPC.VistaModelo
         {
             MostrarPantalla = string.Empty;
             auxiliar1 = 0;
+            Resultado2 = 0;
+            auxiliar2 = 0;
+            Resultado= 0;
         }
         public void procesoSimple() 
         {
@@ -215,6 +253,12 @@ namespace MVCcalculadoraJDPC.VistaModelo
         public ICommand MostrarNumero0 => new Command(InsertarNumero0);
        // public ICommand OperacionCommand => new Command(Operacion);
         public ICommand OperacionSumar => new Command(Sumar);
+        public ICommand OperacionRestar => new Command(Restar);
+        public ICommand OperacionMultiplicar => new Command(Multiplicar);
+        public ICommand OperacionDividir => new Command(Dividir);
+
+        public ICommand OperacionResultado => new Command(Operacion);
+
 
 
 
