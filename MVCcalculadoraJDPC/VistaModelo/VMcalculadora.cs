@@ -110,8 +110,7 @@ namespace MVCcalculadoraJDPC.VistaModelo
             if (Resultado2!=0) 
             {
                 auxiliar1 = double.Parse(MostrarPantalla);
-                Resultado2 += auxiliar1;
-                Resultado = Resultado2;
+                operacion = "+";
                 MostrarPantalla = "";
 
 
@@ -127,8 +126,10 @@ namespace MVCcalculadoraJDPC.VistaModelo
         }
         public void Restar()
         {
-            auxiliar1 = double.Parse(MostrarPantalla);
-            operacion = "-";
+            // auxiliar1 = Convert.ToDouble(MostrarPantalla);
+            double.TryParse(MostrarPantalla, out auxiliar1);
+ 
+             operacion = "-";
             MostrarPantalla = "";
         }
         public void Multiplicar()
@@ -146,40 +147,76 @@ namespace MVCcalculadoraJDPC.VistaModelo
         public void Operacion()
         {
             // auxiliar2 = double.Parse(MostrarPantalla);
-
-            switch (operacion)
+            //  if (double.TryParse(MostrarPantalla, out double numeroMostrado))
             {
-                case "+":
-                    auxiliar2 = double.Parse(MostrarPantalla);
-                    Resultado2 = auxiliar1 + auxiliar2;
-                    Resultado = Resultado2;   
-                    break;
-                case "-":
-                    auxiliar2 = double.Parse(MostrarPantalla);
-                    Resultado = auxiliar1 - auxiliar2;
-                    break;
-                case "*":
-                    auxiliar2 = double.Parse(MostrarPantalla);
-                    Resultado = auxiliar1 * auxiliar2;
-                    break;
-                case "/":
-                    if (auxiliar1 != 0)
-                    {
+                switch (operacion)
+                {
+                    case "+":
+                          auxiliar2 = double.Parse(MostrarPantalla);
+                        Resultado2 = auxiliar1 + auxiliar2;
+                        Resultado = Resultado2;
+                        break;
+                    case "-":
                         auxiliar2 = double.Parse(MostrarPantalla);
-                        Resultado = auxiliar1 / auxiliar2;
-                    }
-                    else
-                    {
-                        DisplayAlert("Estas Mal", "No se puede diviidir entre zero", "qwq");
-                        //resultado.Text = "Error qwq";
-                    }
-                    break;
+                        Resultado = auxiliar1 - auxiliar2;
+                        break;
+                    case "*":
+                        auxiliar2 = double.Parse(MostrarPantalla);
+                        Resultado = auxiliar1 * auxiliar2;
+                        break;
+                    case "/":
+                        if (auxiliar1 != 0)
+                        {
+                            auxiliar2 = double.Parse(MostrarPantalla);
+                            Resultado = auxiliar1 / auxiliar2;
+                        }
+                        else
+                        {
+                            DisplayAlert("Estas Mal", "No se puede diviidir entre zero", "qwq");
+                            //resultado.Text = "Error qwq";
+                        }
+                        break;
+                }
+
+                MostrarPantalla = Convert.ToString(Resultado);
+
+
+
+
+            }
+        }
+        private void Atras()
+        {
+            /*
+            if (Resultado.ToString().Length > 0)
+            {
+                Resultado = double.Parse(Resultado.ToString().Substring(0, Resultado.ToString().Length - 1));
             }
 
-            MostrarPantalla = Resultado.ToString();
-            
+            if (Resultado.ToString().Length == 0)
+            {
+                MostrarPantalla = "0";
+              //  operadorAuxiliar = true;
+            } */
 
+            if (MostrarPantalla.Length > 0)
+            {
+                MostrarPantalla = MostrarPantalla.Remove(MostrarPantalla.Length - 1);
+            }
 
+            if (MostrarPantalla.Length == 0)
+            {
+                MostrarPantalla = "0";
+              //  operadorAuxiliar = true;
+            }
+        }
+        private void Punto()
+        {
+            if (!MostrarPantalla.Contains(","))
+            {
+                MostrarPantalla += ",";
+                
+            }
         }
         public void InsertarNumero1()
         {
@@ -240,6 +277,10 @@ namespace MVCcalculadoraJDPC.VistaModelo
 
         public ICommand ProcesoAsyncomand => new Command(async () => await ProcesoAsyncrono());
         public ICommand ProcesoSimpcomand => new Command(procesoSimple);
+        public ICommand Atrascomand => new Command(Atras);
+        public ICommand Puntocomand => new Command(Punto);
+
+
         public ICommand MostrarNumero1 => new Command(InsertarNumero1);
         public ICommand MostrarNumero2 => new Command(InsertarNumero2);
 

@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MVCcalculadoraJDPC.Vistas.vistaCalculadora">
-    <StackLayout BackgroundColor="Black">
+             x:Class="MVCcalculadoraJDPC.Vistas.vistaCalculadora"
+             xmlns:disparador="clr-namespace:MVCcalculadoraJDPC.Triggers" >
 
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BotonEstilo" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Tomato" />
+                <Style.Triggers>
+                    <EventTrigger Event="Clicked">
+                        <disparador:Tcalculadora />
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout BackgroundColor="Black">
+        
         <Label  Text="{Binding MostrarPantalla}" Margin="50,150,50,0" FontSize="50" HorizontalOptions="End" VerticalOptions="EndAndExpand"  TextColor="White"/>
 
         <Grid Margin="50,50,50,0" VerticalOptions="Center" HorizontalOptions="Center">
@@ -26,33 +41,37 @@
 
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0"  Margin="0,0,10,0" TextColor="Black" Text="AC"  BackgroundColor="Gray" CornerRadius="50"   
-                 Command="{Binding ProcesoSimpcomandLimpiar}"></Button>
+                 Command="{Binding ProcesoSimpcomandLimpiar}" Style="{StaticResource BotonEstilo}"></Button>
 
                 <Button Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" TextColor="Black"  BackgroundColor="Gray" Text="+/-" CornerRadius="50" ></Button>
-                <Button Grid.Row="0" Grid.Column="2" Margin="0,0,10,0" TextColor="Black" BackgroundColor="Gray" Text="⌫" CornerRadius="50" ></Button>
+                <Button Grid.Row="0" Grid.Column="2" Margin="0,0,10,0" TextColor="Black" BackgroundColor="Gray" Text="⌫" CornerRadius="50" 
+                        Command="{Binding Atrascomand}" Style="{StaticResource BotonEstilo}"></Button>
                 <Button Grid.Row="0" Grid.Column="3" Margin="0,0,10,0" TextColor="Black" BackgroundColor="Orange" Text="÷" CornerRadius="50" 
-                        Command="{Binding OperacionDividir}" ></Button>
+                        Command="{Binding OperacionDividir}" Style="{StaticResource BotonEstilo}" ></Button>
 
                 <Button Grid.Row="1" Grid.Column="0" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A"  Text="7" CornerRadius="50" Command="{Binding MostrarNumero7}"></Button>
                 <Button Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="8" CornerRadius="50" Command="{Binding MostrarNumero8}"  ></Button>
                 <Button Grid.Row="1" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="9" CornerRadius="50" Command="{Binding MostrarNumero9}" ></Button>
                 <Button Grid.Row="1" Grid.Column="3" Margin="0,10,0,0" TextColor="White" BackgroundColor="Orange" Text="x" CornerRadius="50"  
-                        Command="{Binding OperacionMultiplicar}"></Button>
+                        Command="{Binding OperacionMultiplicar}" Style="{StaticResource BotonEstilo}" ></Button>
                 <Button Grid.Row="2" Grid.Column="0" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="4" CornerRadius="50" Command="{Binding MostrarNumero4}"  ></Button>
                 <Button Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="5" CornerRadius="50" Command="{Binding MostrarNumero5}" ></Button>
                 <Button Grid.Row="2" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="6" CornerRadius="50" Command="{Binding MostrarNumero6}" ></Button>
                 <Button Grid.Row="2" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="-" CornerRadius="50" 
-                        Command="{Binding OperacionRestar}" ></Button>
+                        Command="{Binding OperacionRestar}" Style="{StaticResource BotonEstilo}"  ></Button>
                 <Button Grid.Row="3" Grid.Column="0" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="1" CornerRadius="50" Command="{Binding MostrarNumero1}" ></Button>
                 <Button Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="2" CornerRadius="50" Command="{Binding MostrarNumero2}"></Button>
                 <Button Grid.Row="3" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A"  Text="3" CornerRadius="50" Command="{Binding MostrarNumero3}"></Button>
-                <Button Grid.Row="3" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="+" CornerRadius="50" Command="{Binding OperacionSumar}"  ></Button>
+                <Button Grid.Row="3" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="+" CornerRadius="50" Command="{Binding OperacionSumar}"  
+                        Style="{StaticResource BotonEstilo}" ></Button>
                 <Button Grid.Row="4" Grid.Column="0" Margin="0,10,10,0" Grid.ColumnSpan="2" BackgroundColor="#443C3A" TextColor="White" Text="0"
                  Command="{Binding MostrarNumero0}"       CornerRadius="50" ></Button>
-                <Button Grid.Row="4" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="." CornerRadius="50" ></Button>
+                <Button Grid.Row="4" Grid.Column="2" Margin="0,10,10,0" TextColor="White" BackgroundColor="#443C3A" Text="." CornerRadius="50" 
+                        Command="{Binding Puntocomand}"  Style="{StaticResource BotonEstilo}"></Button>
                 <Button Grid.Row="4" Grid.Column="3" Margin="0,10,10,0" TextColor="White" BackgroundColor="Orange" Text="=" CornerRadius="50" 
-                 Command="{Binding OperacionResultado}" ></Button>
+                 Command="{Binding OperacionResultado}"  Style="{StaticResource BotonEstilo}"></Button>
             </Grid>
         </Grid>
+        
     </StackLayout>
 </ContentPage>
