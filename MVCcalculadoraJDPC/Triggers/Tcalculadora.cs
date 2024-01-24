@@ -13,9 +13,27 @@ namespace MVCcalculadoraJDPC.Triggers
             if (sender.ClassId == "Numero")
                 TargetLabel.Text += sender.Text;
         } */
+        private Button botonSeleccionado = null;
+
         protected override void Invoke(Button sender)
         {
-            sender.BackgroundColor = sender.IsPressed ? Color.Red : Color.Tomato;
+            if (botonSeleccionado != null)
+            {
+                botonSeleccionado.BackgroundColor = Color.White;
+            }
+
+            if (sender != null)
+            {
+                if (sender.IsPressed)
+                {
+                    sender.BackgroundColor = Color.Tomato;
+                    botonSeleccionado = sender;
+                }
+                else
+                {
+                    sender.BackgroundColor = Color.Green;
+                }
+            }
         }
-    } 
+    }
 }
